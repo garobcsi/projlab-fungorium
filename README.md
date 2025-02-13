@@ -1,1 +1,1 @@
-# ProjLab-Template
+# ProjLab-Fungorium
