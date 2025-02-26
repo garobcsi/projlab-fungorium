@@ -1,0 +1,22 @@
+@startuml example name
+actor Customer
+participant "E-Commerce System" as ECommerce
+participant "Payment Gateway" as Payment
+participant "Inventory System" as Inventory
+participant "Shipping System" as Shipping
+
+Customer -> ECommerce: Browse Products
+ECommerce --> Customer: Display Product List
+Customer -> ECommerce: Add Product to Cart
+ECommerce -> Inventory: Check Product Availability
+Inventory --> ECommerce: Product Available
+ECommerce --> Customer: Product Added to Cart
+Customer -> ECommerce: Proceed to Checkout
+ECommerce -> Payment: Process Payment
+Payment --> ECommerce: Payment Successful
+ECommerce -> Inventory: Reserve Product
+Inventory --> ECommerce: Product Reserved
+ECommerce -> Shipping: Schedule Delivery
+Shipping --> ECommerce: Delivery Scheduled
+ECommerce --> Customer: Order Confirmation
+@enduml
