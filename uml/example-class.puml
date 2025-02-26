@@ -1,0 +1,73 @@
+@startuml
+' Define classes and their attributes/methods
+class GameLogic {
+    - actors : List<Actor>
+    - items : List<Item>
+    - roundBasedItems : Item
+    - map : Map
+    + startGame(): void
+}
+
+class Map {
+    - rooms : Room
+    + loadMap(): void
+}
+
+class Room {
+    - tileGrid : Tile[]
+    - actors : Actor[]
+    - items : Item[]
+    - capacity : int
+    + addition(&Item): void
+    + removeItem(&Item): void
+    + addActor(&Student): void
+    + addActor(&Instructor): void
+    + loadRoom(): void
+    + isAllOcupied(): boolean
+    + create(): void
+}
+
+class CursorRoom {
+    + runSpecialEffect(): void
+}
+
+class PoisonRoom {
+    + runSpecialEffect(): void
+}
+
+abstract class Entity {
+    - id : int
+    - name : string
+    - x : int
+    - y : int
+    - room : Room
+    - icon : BufferedImage
+    + setPost(&Room, int, int): void
+}
+
+abstract class Actor {
+    - skipRounds : Byte
+    - inventory : List<&Item>
+    + addition(&Item): void
+    + removeItem(&Item): void
+    + pickUpItem(&Item): void
+    + useItem(&Item): void
+}
+
+abstract class Item {
+    - limit : int
+    - used : int
+    - locked : boolean
+    + use(): void
+}
+
+' Define relationships
+GameLogic "1" *-- "1" Map
+Map "1" *-- "many" Room
+Room "1" *-- "many" Entity
+Room <|-- CursorRoom
+Room <|-- PoisonRoom
+Entity <|-- Actor
+Entity <|-- Item
+
+@enduml

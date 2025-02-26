@@ -1,0 +1,19 @@
+@startuml
+[*] --> Inaktív
+
+state Inaktív {
+    [*] --> FöldönInaktív
+    FöldönInaktív --> FöldönAktív : PickUpItem()
+    FöldönAktív --> FöldönInaktív : DropItem()
+    FöldönAktív --> Inventory : UseItem()
+}
+
+state Inventory {
+    [*] --> InventoryBan
+    InventoryBan --> FöldönAktív : UseItem()
+}
+
+Inaktív --> [*]
+Inventory --> [*]
+
+@enduml
