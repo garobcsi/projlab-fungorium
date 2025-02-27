@@ -1,5 +1,6 @@
-package model;
+package model.random;
 
+import java.util.List;
 import java.util.Random;
 
 public class RandomSingleton {
@@ -7,7 +8,7 @@ public class RandomSingleton {
     // Private static instance of the class
     private static RandomSingleton instance;
 
-    private final Random random;
+    private Random random;
 
     // Private constructor to prevent instantiation from outside
     private RandomSingleton() {
@@ -20,6 +21,11 @@ public class RandomSingleton {
             instance = new RandomSingleton();
         }
         return instance;
+    }
+
+    // Method to set the seed for the Random instance
+    public void setSeed(long seed) {
+        random = new Random(seed);
     }
 
     // Method to generate a random integer
@@ -57,5 +63,36 @@ public class RandomSingleton {
         }
         double randomValue = random.nextDouble() * 100.0;
         return randomValue < percent;
+    }
+
+    /**
+     * Method to randomly select an object based on weighted percentages.
+     *
+     * @param objects    A list of objects to choose from.
+     * @param percentages A list of percentages corresponding to each object.
+     * @return The selected object based on the weighted percentages.
+     * @throws IllegalArgumentException If the number of objects and percentages don't match,
+     *                                  or if percentages don't sum to 100.
+     */
+    public <T> T weightedRandom(List<T> objects, List<Double> percentages) {
+        if (objects.size() != percentages.size()) {
+            throw new IllegalArgumentException("The number of objects and percentages must match.");
+        }
+
+        double totalPercentage = percentages.stream().mapToDouble(Double::doubleValue).sum();
+        if (Math.abs(totalPercentage - 100.0) > 0.0001) { // Allow for minor floating-point inaccuracies
+            throw new IllegalArgumentException("Percentages must sum to 100.");
+        }
+
+        double cumulativePercentage = 0.0;
+        for (int i = 0; i < objects.size(); i++) {
+            cumulativePercentage += percentages.get(i);
+            if (chance(cumulativePercentage)) {
+                return objects.get(i);
+            }
+        }
+
+        // This should never happen if percentages sum to 100
+        throw new IllegalStateException("Failed to select an object based on percentages.");
     }
 }
