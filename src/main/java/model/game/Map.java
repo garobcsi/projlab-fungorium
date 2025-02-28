@@ -1,18 +1,17 @@
 package model.game;
 
-import model.fungi.FungusThread;
+import model.fungi.FungusBridge;
 import model.insect.Insect;
 import model.map.Tecton;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class Map {
     private List<Tecton> tectons;
     private List<Insect> insects;
     private ArrayList<ArrayList<Integer>> tectonAdjacencyMatrix;
-    private ArrayList<FungusThread> fungusBridges;
+    private ArrayList<FungusBridge> fungusBridges;
 
     public Map(int n){
         tectonAdjacencyMatrix = new ArrayList<>();

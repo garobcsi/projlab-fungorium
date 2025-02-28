@@ -1,7 +1,7 @@
 package model.insect;
 
 import model.map.Tecton;
-import model.fungi.FungusThread;
+import model.fungi.FungusBridge;
 import model.map.TectonAdjacency;
 import model.spore.Spore;
 
@@ -59,7 +59,7 @@ public class Insect {
         currentTecton.clearSpores();
     }
      // 📌 Az összes spóra elfogyasztása után töröljük őket a tektonról
-    public void cutThread(FungusThread thread, TectonAdjacency adjMatrix){
+    public void cutThread(FungusBridge thread, TectonAdjacency adjMatrix){
         adjMatrix.modifyAdjacencyMatrix(thread.getHostTecton().getTectonId(),
                 thread.getTargetTecton().getTectonId());
         thread.getHostTecton().removeFungusBridge(thread);

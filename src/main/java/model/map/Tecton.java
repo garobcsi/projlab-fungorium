@@ -3,17 +3,17 @@ package model.map;
 import java.util.ArrayList;
 
 import model.fungi.Fungus;
-import model.fungi.FungusThread;
+import model.fungi.FungusBridge;
 import model.insect.Insect;
+import model.player.FungusPlayer;
 import model.spore.Spore;
-import model.help.Tuple;
 
 import java.util.List;
 
 public abstract class Tecton {
     private static int incrementer = 0;
     private int tecton_id;
-    private List<FungusThread> fungusBridges;
+    private List<FungusBridge> fungusBridges;
     private boolean hasFungus;
     private List<Insect> insects;
     private List<Spore> spores;
@@ -36,32 +36,9 @@ public abstract class Tecton {
         return tecton_id;
     }
 
-    // ✅ Már nem kell getter, mert az objektum maga dönti el, hogy hozzáadható-e
-    public void addFungusThread(Tecton other) {
-        if (this == other) {
-            System.out.println("❌ Hiba: Nem lehet fonalat létrehozni önmagára! " + this);
-            return;
-        }
-
-        // Már létezik fonal? Akkor nem csinálunk semmit.
-        for (FungusThread ft : fungusBridges) {
-            if ((ft.getHostTecton() == this && ft.getTargetTecton() == other) ||
-                    (ft.getHostTecton() == other && ft.getTargetTecton() == this)) {
-                System.out.println("❌ Már létezik fonal " + this + " és " + other + " között.");
-                return;
-            }
-        }
-
-        // Ha nincs még fonal, létrehozzuk és rögtön hozzáadjuk mindkét tektonhoz.
-        FungusThread thread = new FungusThread(this, other);
-        fungusBridges.add(thread);
-        other.fungusBridges.add(thread);
-        System.out.println("✅ Fonal létrejött: " + thread);
-    }
-
-    public void growFungusBridge(Tecton other, TectonAdjacency adjMatrix){
+    public void growFungusBridge(FungusPlayer owner, Tecton other, TectonAdjacency adjMatrix){
         if(!adjMatrix.checkTectonAdjacency(tecton_id, other.tecton_id)){
-            FungusThread newBridge = new FungusThread(this, other);
+            FungusBridge newBridge = new FungusBridge(owner, this, other);
             fungusBridges.add(newBridge);
             other.fungusBridges.add(newBridge);
             System.out.println("A tektonok össze lettek kötve!");
@@ -74,7 +51,7 @@ public abstract class Tecton {
         System.out.println(fungusBridges.size());
     }
 
-    public List<FungusThread> getFungusBridges() {
+    public List<FungusBridge> getFungusBridges() {
         return fungusBridges;
     }
 
@@ -82,7 +59,7 @@ public abstract class Tecton {
         //TODO
         return false;
     }
-    public void removeFungusBridge(FungusThread fungusThread) {
+    public void removeFungusBridge(FungusBridge fungusThread) {
         fungusBridges.removeIf(ft -> ft.equals(fungusThread));
     }
 

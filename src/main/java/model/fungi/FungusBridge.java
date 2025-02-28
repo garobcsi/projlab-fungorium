@@ -1,19 +1,16 @@
 package model.fungi;
 
-import model.help.Tuple;
 import model.map.Tecton;
+import model.player.FungusPlayer;
 
-public class FungusThread {
-    private final Tecton hostTecton;
+public class FungusBridge extends FungusThread {
+    private FungusPlayer owner;
     private final Tecton targetTecton;
 
-    public FungusThread(Tecton host, Tecton target) {
-        this.hostTecton = host;
+    public FungusBridge(FungusPlayer owner, Tecton host, Tecton target) {
+        super(owner, host);
+        this.owner = owner;
         this.targetTecton = target;
-    }
-
-    public Tecton getHostTecton() {
-        return hostTecton;
     }
 
     public Tecton getTargetTecton() {
@@ -22,9 +19,9 @@ public class FungusThread {
 
     @Override
     public boolean equals(Object obj) {
-        FungusThread otherThread = (FungusThread)obj;
-        if((hostTecton == otherThread.getHostTecton() && targetTecton == otherThread.getTargetTecton()) ||
-                (hostTecton == otherThread.getTargetTecton() && targetTecton == otherThread.getHostTecton())) {
+        FungusBridge otherThread = (FungusBridge)obj;
+        if((location == otherThread.getLocationTecton() && targetTecton == otherThread.getTargetTecton()) ||
+                (location == otherThread.getTargetTecton() && targetTecton == otherThread.getLocationTecton())) {
             return true;
         }else{
             return false;
@@ -33,6 +30,6 @@ public class FungusThread {
 
     @Override
     public String toString() {
-        return "FungusThread: " + hostTecton + " -> " + targetTecton;
+        return "FungusThread: " + location + " -> " + targetTecton;
     }
 }

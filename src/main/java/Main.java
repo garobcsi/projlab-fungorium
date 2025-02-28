@@ -1,6 +1,5 @@
 import model.fungi.CommonFungus;
 import model.fungi.Fungus;
-import model.fungi.FungusThread;
 import model.insect.Insect;
 import model.map.*;
 

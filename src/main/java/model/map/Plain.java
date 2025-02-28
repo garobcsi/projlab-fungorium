@@ -1,10 +1,10 @@
 package model.map;
 
-import model.fungi.FungusThread;
+import model.fungi.FungusBridge;
 
 public class Plain extends Tecton {
     private boolean hasThread;
-    public void addThread(FungusThread ft) {
+    public void addThread(FungusBridge ft) {
         //TODO
     }
 }
