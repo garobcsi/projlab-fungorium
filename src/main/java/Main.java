@@ -2,6 +2,7 @@ import model.fungi.CommonFungus;
 import model.fungi.Fungus;
 import model.insect.Insect;
 import model.map.*;
+import model.player.FungusPlayer;
 
 public class Main {
     public static void main(String[] args) {
@@ -24,9 +25,10 @@ public class Main {
         Desert dTecton = new Desert();
         Swamp sTecton = new Swamp();
         Tundra tTecton = new Tundra();
-        dTecton.growFungusBridge(sTecton, tectonMatrix);
-        sTecton.growFungusBridge(dTecton, tectonMatrix);
-        sTecton.growFungusBridge(tTecton, tectonMatrix);
+        FungusPlayer fungusPlayer1 = new FungusPlayer();
+        dTecton.growFungusBridge(fungusPlayer1,sTecton, tectonMatrix);
+        sTecton.growFungusBridge(fungusPlayer1, dTecton, tectonMatrix);
+        sTecton.growFungusBridge(fungusPlayer1, tTecton, tectonMatrix);
         tectonMatrix.showAdjacencyMatrix();
         Insect insect1 = new Insect(dTecton);
         Fungus fungus1 = new CommonFungus();

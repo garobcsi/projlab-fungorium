@@ -37,7 +37,9 @@ public class Insect {
 
         if (adjacencyMatrix.checkTectonAdjacency(currentTecton.getTectonId(), targetTecton.getTectonId())) {
             System.out.println("🐜 A rovar átlépett " + currentTecton + " -> " + targetTecton);
+            currentTecton.removeInsect(this);
             currentTecton = targetTecton;
+            currentTecton.addInsect(this);
             consumeSpores(); // 📌 Amint átlép, automatikusan megeszi az ott lévő spórákat
         } else {
             System.out.println("❌ Nincs fonal, nem lehet mozogni " + currentTecton + " -> " + targetTecton);
@@ -60,9 +62,9 @@ public class Insect {
     }
      // 📌 Az összes spóra elfogyasztása után töröljük őket a tektonról
     public void cutThread(FungusBridge thread, TectonAdjacency adjMatrix){
-        adjMatrix.modifyAdjacencyMatrix(thread.getHostTecton().getTectonId(),
+        adjMatrix.modifyAdjacencyMatrix(thread.getLocationTecton().getTectonId(),
                 thread.getTargetTecton().getTectonId());
-        thread.getHostTecton().removeFungusBridge(thread);
+        thread.getLocationTecton().removeFungusBridge(thread);
         thread.getTargetTecton().removeFungusBridge(thread);
     }
 
