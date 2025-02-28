@@ -1,11 +1,15 @@
 package model.player;
 
 public abstract class GeneralPlayer {
-    private int id;
+    private static int id = 0;
+    private String name;
 
-    public void action() {
-        //TODO
+    public GeneralPlayer(String name) {
+        id = ++id;
+        this.name = name;
     }
+
+    public abstract void doAction();
 }
 
 /*
