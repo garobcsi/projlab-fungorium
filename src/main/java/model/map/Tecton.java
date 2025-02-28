@@ -2,6 +2,7 @@ package model.map;
 
 import java.util.ArrayList;
 
+import model.fungi.Fungus;
 import model.fungi.FungusThread;
 import model.insect.Insect;
 import model.spore.Spore;
@@ -10,18 +11,22 @@ import model.help.Tuple;
 import java.util.List;
 
 public abstract class Tecton {
+    private static int incrementer = 0;
+    int tecton_id;
     private List<FungusThread> fungusBridges;
     private boolean hasFungus;
     private List<Insect> insects;
     private List<Spore> spores;
-    private List<Tuple<String,Tecton>> neighbors;
 
     public Tecton(){
+        tecton_id = incrementer++;
         fungusBridges = new ArrayList<>();
         insects = new ArrayList<>();
         spores = new ArrayList<>();
         hasFungus = false;
     }
+
+
 
     // ✅ Már nem kell getter, mert az objektum maga dönti el, hogy hozzáadható-e
     public void addFungusThread(Tecton other) {
@@ -44,6 +49,17 @@ public abstract class Tecton {
         fungusBridges.add(thread);
         other.fungusBridges.add(thread);
         System.out.println("✅ Fonal létrejött: " + thread);
+    }
+
+    public void growFungusBridge(Tecton other, TectonAdjacency adjMatrix){
+        if(!adjMatrix.checkTectonAdjacency(tecton_id, other.tecton_id)){
+            FungusThread newBridge = new FungusThread(this, other);
+            fungusBridges.add(newBridge);
+            other.fungusBridges.add(newBridge);
+            System.out.println("A tektonok össze lettek kötve!");
+        }else{
+            System.out.println("A tektonok már össze vannak kötve!");
+        }
     }
 
     public List<FungusThread> getFungusBridges() {

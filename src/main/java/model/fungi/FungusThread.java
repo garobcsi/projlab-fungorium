@@ -1,5 +1,6 @@
 package model.fungi;
 
+import model.help.Tuple;
 import model.map.Tecton;
 
 public class FungusThread {

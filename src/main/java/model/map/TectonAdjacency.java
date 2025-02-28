@@ -1,20 +1,11 @@
-package model.game;
-
-import model.fungi.FungusThread;
-import model.insect.Insect;
-import model.map.Tecton;
+package model.map;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
-public class Map {
-    private List<Tecton> tectons;
-    private List<Insect> insects;
+public class TectonAdjacency {
     private ArrayList<ArrayList<Integer>> tectonAdjacencyMatrix;
-    private ArrayList<FungusThread> fungusBridges;
 
-    public Map(int n){
+    public TectonAdjacency(int n){
         tectonAdjacencyMatrix = new ArrayList<>();
         fillAdjacencyMatrix(n, n);
     }
@@ -26,6 +17,15 @@ public class Map {
                 row.add(0);
             }
             tectonAdjacencyMatrix.add(row);
+        }
+    }
+
+    public void showAdjacencyMatrix(){
+        for(int i = 0; i < tectonAdjacencyMatrix.size(); i++){
+            for(int j = 0; j < tectonAdjacencyMatrix.get(i).size(); j++){
+                System.out.print(tectonAdjacencyMatrix.get(i).get(j));
+            }
+            System.out.print("\n");
         }
     }
 
