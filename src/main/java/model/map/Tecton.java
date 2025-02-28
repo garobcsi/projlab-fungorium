@@ -12,7 +12,7 @@ import java.util.List;
 
 public abstract class Tecton {
     private static int incrementer = 0;
-    int tecton_id;
+    private int tecton_id;
     private List<FungusThread> fungusBridges;
     private boolean hasFungus;
     private List<Insect> insects;
@@ -26,11 +26,18 @@ public abstract class Tecton {
         spores = new ArrayList<>();
         hasFungus = false;
     }
+<<<<<<< Updated upstream
     public void addFungus(Fungus f) {
         this.fungus = f;
         hasFungus = true;
     }
 
+=======
+
+    public int getTectonId() {
+        return tecton_id;
+    }
+>>>>>>> Stashed changes
 
     // ✅ Már nem kell getter, mert az objektum maga dönti el, hogy hozzáadható-e
     public void addFungusThread(Tecton other) {
@@ -66,6 +73,10 @@ public abstract class Tecton {
         }
     }
 
+    public void getListSize(){
+        System.out.println(fungusBridges.size());
+    }
+
     public List<FungusThread> getFungusBridges() {
         return fungusBridges;
     }
@@ -74,8 +85,8 @@ public abstract class Tecton {
         //TODO
         return false;
     }
-    public void removeThread(FungusThread fungusThread) {
-        //TODO
+    public void removeFungusBridge(FungusThread fungusThread) {
+        fungusBridges.removeIf(ft -> ft.equals(fungusThread));
     }
 
     public void addSpores(List<Spore> sp){

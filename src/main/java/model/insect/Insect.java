@@ -1,6 +1,10 @@
 package model.insect;
 
 import model.map.Tecton;
+<<<<<<< Updated upstream
+=======
+import model.fungi.FungusThread;
+>>>>>>> Stashed changes
 import model.map.TectonAdjacency;
 import model.spore.Spore;
 
@@ -43,6 +47,7 @@ public class Insect {
         }
     }
 
+<<<<<<< Updated upstream
     // 📌 A rovar automatikusan megeszi az összes spórát a jelenlegi tektonon
     private void consumeSpores() {
         List<Spore> spores = currentTecton.getSpores();
@@ -56,6 +61,13 @@ public class Insect {
             consumeSpore(spore);
         }
         currentTecton.clearSpores(); // 📌 Az összes spóra elfogyasztása után töröljük őket a tektonról
+=======
+    public void cutThread(FungusThread thread, TectonAdjacency adjMatrix){
+        adjMatrix.modifyAdjacencyMatrix(thread.getHostTecton().getTectonId(),
+                thread.getTargetTecton().getTectonId());
+        thread.getHostTecton().removeFungusBridge(thread);
+        thread.getTargetTecton().removeFungusBridge(thread);
+>>>>>>> Stashed changes
     }
 
     // 📌 A rovar elfogyaszt egy adott spórát, amely automatikusan alkalmazza a hatását

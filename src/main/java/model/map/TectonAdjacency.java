@@ -38,4 +38,9 @@ public class TectonAdjacency {
             return false;
         }
     }
+
+    public void modifyAdjacencyMatrix(int n, int m){
+        tectonAdjacencyMatrix.get(n).set(m, 0);
+        tectonAdjacencyMatrix.get(m).set(n, 0);
+    }
 }

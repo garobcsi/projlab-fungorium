@@ -21,6 +21,17 @@ public class FungusThread {
     }
 
     @Override
+    public boolean equals(Object obj) {
+        FungusThread otherThread = (FungusThread)obj;
+        if((hostTecton == otherThread.getHostTecton() && targetTecton == otherThread.getTargetTecton()) ||
+                (hostTecton == otherThread.getTargetTecton() && targetTecton == otherThread.getHostTecton())) {
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    @Override
     public String toString() {
         return "FungusThread: " + hostTecton + " -> " + targetTecton;
     }
