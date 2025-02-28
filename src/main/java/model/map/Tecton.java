@@ -17,6 +17,7 @@ public abstract class Tecton {
     private boolean hasFungus;
     private List<Insect> insects;
     private List<Spore> spores;
+    private Fungus fungus;
 
     public Tecton(){
         tecton_id = incrementer++;
@@ -25,7 +26,10 @@ public abstract class Tecton {
         spores = new ArrayList<>();
         hasFungus = false;
     }
-
+    public void addFungus(Fungus f) {
+        this.fungus = f;
+        hasFungus = true;
+    }
 
 
     // ✅ Már nem kell getter, mert az objektum maga dönti el, hogy hozzáadható-e
@@ -89,8 +93,12 @@ public abstract class Tecton {
     public void killInsect() {
         //TODO
     }
+    public void clearSpores() {
+        spores.clear();
+    }
 
     public List<Spore> getSpores(){
         return spores;
     }
+    public int getTectonId() {return tecton_id;}
 }

@@ -1,4 +1,7 @@
+import model.fungi.CommonFungus;
+import model.fungi.Fungus;
 import model.fungi.FungusThread;
+import model.insect.Insect;
 import model.map.*;
 
 public class Main {
@@ -28,5 +31,16 @@ public class Main {
         sTecton.growFungusBridge(dTecton, tectonMatrix);
         sTecton.growFungusBridge(tTecton, tectonMatrix);
         tectonMatrix.showAdjacencyMatrix();
+        Insect insect1 = new Insect(dTecton);
+        Fungus fungus1 = new CommonFungus();
+        dTecton.addFungus(fungus1);
+        fungus1.produceSpore();
+        fungus1.produceSpore();
+        fungus1.produceSpore();
+        fungus1.disperseSpore(sTecton);
+        System.out.println(fungus1.);
+        insect1.move(sTecton, tectonMatrix);
+        insect1.move(sTecton, tectonMatrix);
+        System.out.println(insect1.getNutrition());
     }
 }
