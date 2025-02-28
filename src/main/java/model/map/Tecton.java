@@ -26,18 +26,15 @@ public abstract class Tecton {
         spores = new ArrayList<>();
         hasFungus = false;
     }
-<<<<<<< Updated upstream
     public void addFungus(Fungus f) {
         this.fungus = f;
         hasFungus = true;
     }
 
-=======
 
     public int getTectonId() {
         return tecton_id;
     }
->>>>>>> Stashed changes
 
     // ✅ Már nem kell getter, mert az objektum maga dönti el, hogy hozzáadható-e
     public void addFungusThread(Tecton other) {
@@ -111,5 +108,4 @@ public abstract class Tecton {
     public List<Spore> getSpores(){
         return spores;
     }
-    public int getTectonId() {return tecton_id;}
 }
